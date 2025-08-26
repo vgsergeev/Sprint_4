@@ -11,8 +11,11 @@ import static ru.praktikum.utils.EnvConfig.*;
 public class MainPage {
 
     private final WebDriver driver;
+    private final WebDriverWait wait;
+
     public MainPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(this.driver, Duration.ofSeconds(IMPLICITY_TIMEOUT));
     }
 
     //Кнопки Заказать на главной странице
@@ -46,8 +49,7 @@ public class MainPage {
     }
 
     public void checkFaqPanelIsDisplayed(WebElement faqPanel) {
-        new WebDriverWait(driver, Duration.ofSeconds(IMPLICITY_TIMEOUT))
-                .until(ExpectedConditions.visibilityOf(faqPanel));
+        wait.until(ExpectedConditions.visibilityOf(faqPanel));
         Assert.assertTrue(faqPanel.isDisplayed());
     }
 

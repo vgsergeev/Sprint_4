@@ -13,8 +13,11 @@ import static ru.praktikum.utils.EnvConfig.*;
 public class OrderPage {
 
     private final WebDriver driver;
+    private final WebDriverWait wait;
+
     public OrderPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(this.driver, Duration.ofSeconds(IMPLICITY_TIMEOUT));
     }
 
     private final By stationContainer = By.cssSelector(".select-search__input");
@@ -28,11 +31,12 @@ public class OrderPage {
     private final By buttonOrderRentForm = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     private final By yesOrderButton = By.xpath(".//div[@class='Order_Modal__YZ-d3']/div/button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     private final By headerConfirmation = By.cssSelector(".Order_ModalHeader__3FDaJ");
+    private final By customerContainersAll = By.cssSelector(".Input_Input__1iN_Z.Input_Responsible__1jDKN");
 
 
     //Методы для заполнения полей в форме заказчика
     public List<WebElement> customerContainers() {
-        return driver.findElements(By.cssSelector(".Input_Input__1iN_Z.Input_Responsible__1jDKN"));
+        return driver.findElements(customerContainersAll);
     }
 
     public void sendDataCustomerContainers(String name, String surname, String address, String station, String phone) {
@@ -44,8 +48,7 @@ public class OrderPage {
     }
 
     public void clickOnDropdownListStations() {
-        new WebDriverWait(driver, Duration.ofSeconds(IMPLICITY_TIMEOUT))
-                .until(ExpectedConditions.presenceOfElementLocated(dropdownListStations));
+       wait.until(ExpectedConditions.presenceOfElementLocated(dropdownListStations));
         driver.findElement(dropdownListStations).click();
     }
 
@@ -61,8 +64,7 @@ public class OrderPage {
 
     public List<WebElement> getDurationOptions() {
         driver.findElement(dropDownPlaceholder).click();
-        new WebDriverWait(driver, Duration.ofSeconds(IMPLICITY_TIMEOUT))
-                .until(ExpectedConditions.presenceOfElementLocated(dropDownDurationOption));
+        wait.until(ExpectedConditions.presenceOfElementLocated(dropDownDurationOption));
         return driver.findElements(dropDownDurationOption);
     }
 
@@ -76,14 +78,12 @@ public class OrderPage {
 
     //Методы для подтверждения заказа
     public void clickOnYesOrderButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(IMPLICITY_TIMEOUT))
-                .until(ExpectedConditions.presenceOfElementLocated(yesOrderButton));
+        wait.until(ExpectedConditions.presenceOfElementLocated(yesOrderButton));
         driver.findElement(yesOrderButton).click();
     }
 
     public String getConfirmationText() {
-        new WebDriverWait(driver, Duration.ofSeconds(IMPLICITY_TIMEOUT))
-                .until(ExpectedConditions.presenceOfElementLocated(headerConfirmation));
+        wait.until(ExpectedConditions.presenceOfElementLocated(headerConfirmation));
         return driver.findElement(headerConfirmation).getText();
     }
 }
