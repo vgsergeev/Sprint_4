@@ -45,6 +45,7 @@ public class MainPage {
 
     public void faqButtonScrollClick(WebElement faqButton) {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", faqButton);
+        wait.until(ExpectedConditions.visibilityOf(faqButton));
         faqButton.click();
     }
 
