@@ -18,21 +18,26 @@ public class MainPage {
     //Кнопки Заказать на главной странице
     private final By orderButtonHeader = By.xpath(".//div[@class='Header_Nav__AGCXC']/button[@class='Button_Button__ra12g']");
     private final By orderButtonMiddle = By.xpath(".//div[@class='Home_FinishButton__1_cWm']/button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By faqButtonsAll = By.cssSelector(".accordion__button");
+    private final By faqPanelsAll = By.cssSelector(".accordion__panel");
+    private final By cookieYesButton = By.cssSelector(".App_CookieButton__3cvqF");
 
     // Метод для открытия главной страницы
     public void openMainPage() {
         driver.get(BASE_URL);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(cookieYesButton));
+        driver.findElement(cookieYesButton).click();
     }
 
 
     // Методы для области Вопросы о важном (FAQ) главной страницы
 
     public List<WebElement> getFaqButtons() {
-        return driver.findElements(By.cssSelector(".accordion__button"));
+        return driver.findElements(faqButtonsAll);
     }
 
     public List<WebElement> getFaqPanels() {
-        return driver.findElements(By.cssSelector(".accordion__panel"));
+        return driver.findElements(faqPanelsAll);
     }
 
     public void faqButtonScrollClick(WebElement faqButton) {
