@@ -28,8 +28,8 @@ public class OrderPage {
     private final By dropDownPlaceholder = By.cssSelector(".Dropdown-placeholder");
     private final By dropDownDurationOption = By.cssSelector(".Dropdown-option");
     private final By blackColouredScooter = By.cssSelector(".Checkbox_Input__14A2w[id='black']");
-    private final By buttonOrderRentForm = By.xpath(".//div[@class='Order_Content__bmtHS']/div[3]/button[2]");
-    private final By yesOrderButton = By.xpath("/html/body/div/div/div[2]/div[5]/div[2]/button[2]");
+    private final By buttonOrderRentForm = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']");
+    private final By yesOrderButton = By.xpath(".//button[text()='Да']");
     private final By headerConfirmation = By.cssSelector(".Order_ModalHeader__3FDaJ");
     private final By customerContainersAll = By.cssSelector(".Input_Input__1iN_Z.Input_Responsible__1jDKN");
 
